@@ -1,0 +1,47 @@
+package com.example.room_db;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+import java.util.List;
+
+public class CategoryAdapter extends BaseAdapter {
+    Context cntx;
+    List<Category> categories;
+
+    public CategoryAdapter(Context cntx, List<Category> categories) {
+        this.cntx = cntx;
+        this.categories = categories;
+    }
+
+    @Override
+    public int getCount() {
+        return categories.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return categories.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        final Category category = categories.get(position);
+        convertView = LayoutInflater.from(cntx).inflate(R.layout.category_item, parent, false);
+
+        TextView id = convertView.findViewById(R.id._id);
+        TextView name = convertView.findViewById(R.id.name);
+        id.setText(String.valueOf(category._id));
+        name.setText(category.name);
+
+        return convertView;
+    }
+}
